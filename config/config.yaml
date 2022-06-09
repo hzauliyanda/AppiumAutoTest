@@ -1,0 +1,51 @@
+# 注意1：apk需放在jenkins配置节点的远程目录下
+# 注意2：apk的命名中需包含test或release，分别代表测试或生产的包
+
+# appium启动的capsbilities信息
+capsbilities:
+  platformName: Android
+  platformVersion: 10
+  deviceName: XPL07777777
+  appPackage: com.iistant   # app包名
+  appActivity: com.WelcomeActivity
+  skipServerInstallation: True   # 不再自动安装uiautomator
+  automationName: uiautomator2
+  autoGrantPermissions: True     # 自动获取权限
+
+# appium启动的ip和端口，默认可不用修改
+appiumServer:
+  ip: 127.0.0.1
+  port: 4723
+
+# 测试用例执行过程的主要配置参数，其中enviroment的配置直接影响执行时使用测试用户还是生产用户
+runtest:
+  enviroment: test    # 选择执行脚本的环境，测试环境：test，生产环境：release,
+  markers:   # 可选项：BVT(BVT用例)、text(只检查文本),可多个，需严格按照以下格式编写
+    - BVT
+  rerun: 0   # 失败重跑次数
+  log_clear: 1  #每次执行用例是否清空日志文件 1是开启，0是失败
+  log_level: debug  # 日志等级  debug、info、warning、error、critical
+
+# 测试用例执行的用户信息，需根据实际情况修改,此处的测试环境和生产信息的取值，取决于下方runtest的环境配置的是测试还是生产
+user:
+  # 测试环境用户，最好固定一个用户
+  test:
+    username: 13299999999      # 登录用户名
+    password: 999999           # 登录密码
+    orgId: ZDHCSYY        # 医院org_id
+    deptId: zdhcsnl       # 医院科室dept_id
+    deptname: 自动化测试内科     # 医院科室名字
+  # 生产环境用户，最好固定一个用户
+  release:
+    username: 132*******      # 登录用户名
+    password: *        # 登录密码
+    orgId: *      # 医院org_id
+    deptId: *       # 医院科室dept_id
+    deptname: 自动化*****内科     # 医院科室名字
+
+# app内的配置信息
+app:
+  modules:     #模块范围，默认全部模块，可不用修改，用于核对文案是否正确
+    - test模块
+  detail_tab:   # 患者详情页各tab，默认全部模块 可不用修改，用于核对文案是否正确
+    - test_info
