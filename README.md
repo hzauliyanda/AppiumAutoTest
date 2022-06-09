@@ -1,1 +1,2 @@
 # AppiumAutoTest
+基于PO模式封装的appium端自动化框架
